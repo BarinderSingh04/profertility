@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:profertility/screens/popular_product_screen.dart';
+import 'package:profertility/screens/select_gender_screen.dart';
 import 'package:profertility/screens/theme/colors.dart';
+import 'package:profertility/screens/welcome_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -13,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Profertility',
       theme: ThemeData(
         primarySwatch: ThemeColor.mcgpalette,
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomeScreen(title: 'Flutter Demo Home Page'),
+      home: const PopularProductScreen()
     );
   }
 }
