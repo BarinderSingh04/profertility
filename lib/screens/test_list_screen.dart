@@ -192,9 +192,7 @@ class _TestListScreenState extends State<TestListScreen>
       context: context,
       builder: (context) {
         return const FilterBottomSheet(
-          filters: [
-            "Sort"
-          ],
+          filters: ["Sort"],
           childrens: [
             TestFilter(),
           ],
@@ -263,7 +261,9 @@ class TestListWidget extends StatelessWidget {
                       Text(
                         "Items",
                       ),
-                      Text("Total"),
+                      SizedBox(
+                        width: 40,
+                      ),
                     ],
                   ),
                   Row(
@@ -281,11 +281,8 @@ class TestListWidget extends StatelessWidget {
                           color: Color(0xff1d1d1d),
                         ),
                       ),
-                      Text(
-                        amount,
-                        style: const TextStyle(
-                          color: Color(0xff1d1d1d),
-                        ),
+                      const SizedBox(
+                        width: 50,
                       ),
                     ],
                   ),

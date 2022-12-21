@@ -200,58 +200,6 @@ class TestDetailScreen extends StatelessWidget {
                 const Divider(color: Color(0xfff6f6f6), thickness: 4),
                 const SizedBox(height: 20),
                 const Text(
-                  "Patient details",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff1d1d1d),
-                  ),
-                ),
-                const SizedBox(height: 18),
-                IntrinsicHeight(
-                  child: Row(
-                    children: const [
-                      Text(
-                        "Edward Collen ",
-                        style: TextStyle(
-                          color: Color(0xff4d1a53),
-                        ),
-                      ),
-                      VerticalDivider(color: Colors.grey),
-                      Text(
-                        " 2233 3843 009",
-                        style: TextStyle(
-                          color: Color(0xff4d1a53),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "CollenEd5237@gmail.com",
-                  style: TextStyle(
-                    color: Color(0xff1d1d1d),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Sector 44 C",
-                  style: TextStyle(
-                    color: Color(0xff1d1d1d),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "856 Spinka Inlet Apt. 576 US",
-                  style: TextStyle(
-                    color: Color(0xff1d1d1d),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Divider(color: Color(0xfff6f6f6), thickness: 4),
-                const SizedBox(height: 20),
-                const Text(
                   "Tests",
                   style: TextStyle(
                     fontSize: 16.0,

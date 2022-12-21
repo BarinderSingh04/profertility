@@ -7,8 +7,8 @@ class Config {
   ];
 
   static List<String> sortingTest = [
-    "All Tests",
-    "Open Tests",
+    "Pending Tests",
+    "Completed Tests",
   ];
 
   static List<String> dietition = [

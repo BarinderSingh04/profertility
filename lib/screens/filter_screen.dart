@@ -123,7 +123,6 @@ class FilterWidget extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: Container(
-
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 16.0),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xffddfffd) : const Color(0xfff7f8fa),

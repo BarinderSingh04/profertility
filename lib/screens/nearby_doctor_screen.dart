@@ -19,7 +19,7 @@ class NearbyDoctorScreen extends StatelessWidget {
         centerTitle: false,
         automaticallyImplyLeading: false,
         title: const Text(
-          "Nearby Doctors",
+          "Schedule Appointment",
           style: TextStyle(
             color: Color(0xff4d1a53),
             fontWeight: FontWeight.w500,
@@ -87,7 +87,6 @@ class DoctorGridItem extends StatefulWidget {
   final String? name;
   final String? specializedIn;
   final String? experience;
-  final String? rating;
   final String? image;
   final bool isFavourite;
 
@@ -96,7 +95,6 @@ class DoctorGridItem extends StatefulWidget {
     this.name,
     this.specializedIn,
     this.experience,
-    this.rating,
     this.image,
     this.isFavourite = false,
   });
@@ -195,22 +193,6 @@ class _DoctorGridItemState extends State<DoctorGridItem> {
                       const Gap(4.0),
                       Text(
                         widget.experience ?? "4 years",
-                        style: GoogleFonts.comfortaa().copyWith(
-                          fontSize: 12,
-                          color: const Color(0xff1d1d1d),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const Gap(8.0),
-                      Image.asset(
-                        "assets/images/star.png",
-                        fit: BoxFit.cover,
-                        width: 14,
-                        height: 14,
-                      ),
-                      const Gap(4.0),
-                      Text(
-                        widget.rating ?? "4.6",
                         style: GoogleFonts.comfortaa().copyWith(
                           fontSize: 12,
                           color: const Color(0xff1d1d1d),

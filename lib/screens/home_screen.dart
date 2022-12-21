@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:profertility/screens/cart_screen.dart';
 import 'package:profertility/screens/health_score_screen.dart';
 import 'package:profertility/screens/notification_screen.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'myappointment_screen.dart';
 import 'popular_products_screen.dart';
@@ -98,7 +101,7 @@ class HomeScreen extends StatelessWidget {
           const Gap(16.0),
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 200,
+            height: 220,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: LayoutBuilder(builder: (context, constraints) {
@@ -125,19 +128,23 @@ class HomeScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.all(6.0),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    color: Colors.white),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.white,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Image.asset("assets/images/love.png"),
-                                    const Text(
-                                      "Health Scores",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12.0,
-                                        color: Color(0xff1d1d1d),
+                                    const Expanded(
+                                      child: Text(
+                                        "Fertility Health Scores",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.0,
+                                          color: Color(0xff1d1d1d),
+                                        ),
                                       ),
                                     )
                                   ],
@@ -146,15 +153,55 @@ class HomeScreen extends StatelessWidget {
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Text(
-                                      "96%",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 46,
+                                  children: [
+                                    SizedBox(
+                                      width: 120,
+                                      height: 120,
+                                      child: SfCircularChart(
+                                        annotations: <CircularChartAnnotation>[
+                                          CircularChartAnnotation(
+                                            angle: 0,
+                                            radius: '0%',
+                                            height: '120%',
+                                            width: '120%',
+                                            widget: const Center(
+                                              child: Text(
+                                                "96%",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 28,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                        series: <
+                                            RadialBarSeries<_PieData, String>>[
+                                          RadialBarSeries<_PieData, String>(
+                                            dataSource: [_PieData("0", 90)],
+                                            radius: '100%',
+                                            innerRadius: '94%',
+                                            cornerStyle: CornerStyle.bothCurve,
+                                            maximumValue: 100,
+                                            trackColor: const Color(0xffA78DAA),
+                                            xValueMapper: (_PieData data, _) =>
+                                                data.xData,
+                                            yValueMapper: (_PieData data, _) =>
+                                                data.yData,
+                                            pointColorMapper: (datum, index) {
+                                              return Colors.white;
+                                            },
+                                            dataLabelMapper:
+                                                (_PieData data, _) => data.text,
+                                            dataLabelSettings:
+                                                const DataLabelSettings(
+                                              isVisible: false,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       "5 mins ago",
                                       style: TextStyle(
                                         fontSize: 16.0,
@@ -262,7 +309,8 @@ class HomeScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               Image.asset(
-                                                  "assets/images/arrow_down.png")
+                                                "assets/images/arrow_down.png",
+                                              )
                                             ],
                                           ),
                                         ),
@@ -307,7 +355,8 @@ class HomeScreen extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                              "assets/images/menstruals.png"),
+                                            "assets/images/menstruals.png",
+                                          ),
                                           const Gap(8.0),
                                           const Text(
                                             "Menstruals",
@@ -358,7 +407,8 @@ class HomeScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               Image.asset(
-                                                  "assets/images/arrow_up.png")
+                                                "assets/images/arrow_up.png",
+                                              )
                                             ],
                                           ),
                                         ),
@@ -610,4 +660,11 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class _PieData {
+  _PieData(this.xData, this.yData, [this.text]);
+  final String xData;
+  final num yData;
+  final String? text;
 }

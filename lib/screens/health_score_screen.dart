@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:profertility/screens/widgets/my_appbar.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HealthScoreScreen extends StatelessWidget {
   final int score;
@@ -21,18 +22,25 @@ class HealthScoreScreen extends StatelessWidget {
                 width: 200,
                 height: 200,
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/progress_chart.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Text(
-                  "$score%",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
+                child: SfCircularChart(
+                  annotations: [
+                    CircularChartAnnotation(
+                      angle: 0,
+                      radius: '0%',
+                      height: '120%',
+                      width: '120%',
+                      widget: Center(
+                        child: Text(
+                          "$score%",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 34,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  series: getRadialBarCustomizedSeries(),
                 ),
               ),
             ),
@@ -123,6 +131,41 @@ class HealthScoreScreen extends StatelessWidget {
       ),
     );
   }
+
+  List<RadialBarSeries<ChartSampleData, String>>
+      getRadialBarCustomizedSeries() {
+    return <RadialBarSeries<ChartSampleData, String>>[
+      RadialBarSeries<ChartSampleData, String>(
+        maximumValue: 1000,
+        gap: '20%',
+        radius: '100%',
+        dataSource: <ChartSampleData>[
+          ChartSampleData(
+              x: 'Vehicle',
+              y: 600.0,
+              text: '100%',
+              pointColor: const Color(0xffe6a01c)),
+          ChartSampleData(
+              x: 'Education',
+              y: 870.0,
+              text: '100%',
+              pointColor: const Color(0xff07a89d)),
+          ChartSampleData(
+              x: 'Home',
+              y: 379.0,
+              text: '100%',
+              pointColor: const Color(0xfffd7600)),
+        ],
+        cornerStyle: CornerStyle.bothCurve,
+        innerRadius: '60%',
+        xValueMapper: (ChartSampleData data, _) => data.x,
+        yValueMapper: (ChartSampleData data, _) => data.y,
+        pointRadiusMapper: (ChartSampleData data, _) => data.text,
+        pointColorMapper: (ChartSampleData data, _) => data.pointColor,
+        legendIconType: LegendIconType.circle,
+      ),
+    ];
+  }
 }
 
 class CardWidget extends StatelessWidget {
@@ -193,6 +236,20 @@ class CardWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class ChartSampleData {
+  final String x;
+  final double y;
+  final String text;
+  final Color pointColor;
+
+  ChartSampleData({
+    required this.x,
+    required this.y,
+    required this.text,
+    required this.pointColor,
+  });
 }
 
 class HealthScoreWidget extends StatelessWidget {
