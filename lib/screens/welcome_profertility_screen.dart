@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profertility/screens/general_questions_screen.dart';
+import 'package:profertility/screens/form_screen.dart';
 
 class WelcomeProfertility extends StatefulWidget {
   const WelcomeProfertility({super.key});
@@ -16,7 +16,7 @@ class _WelcomeProfertilityState extends State<WelcomeProfertility> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const GeneralQuestionsScreen(),
+          builder: (context) => const FormScreen(),
         ),
       );
     });

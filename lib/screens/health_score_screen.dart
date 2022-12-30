@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:profertility/screens/scores_screen.dart';
 import 'package:profertility/screens/widgets/my_appbar.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -44,7 +45,19 @@ class HealthScoreScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Gap(16.0),
+            const Gap(8.0),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Your Health Score Looks Good!",
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xff07a89d),
+                ),
+              ),
+            ),
+            const Gap(24.0),
             Wrap(
               runSpacing: 16,
               children: const [
@@ -184,55 +197,64 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      constraints: const BoxConstraints.tightFor(height: 140),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(247, 234, 238, 255),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Color(0xff4d1a53),
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 6.0,
-                  horizontal: 14.0,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: colors,
-                  ),
-                ),
-                child: Text(
-                  percent,
-                  style: const TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ScoreScreen(),
           ),
-          Text(
-            description,
-            maxLines: 3,
-          )
-        ],
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        constraints: const BoxConstraints.tightFor(height: 140),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(247, 234, 238, 255),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Color(0xff4d1a53),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 6.0,
+                    horizontal: 14.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: colors,
+                    ),
+                  ),
+                  child: Text(
+                    percent,
+                    style: const TextStyle(
+                      fontSize: 12.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              description,
+              maxLines: 3,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -241,14 +263,14 @@ class CardWidget extends StatelessWidget {
 class ChartSampleData {
   final String x;
   final double y;
-  final String text;
-  final Color pointColor;
+  final String? text;
+  final Color? pointColor;
 
   ChartSampleData({
     required this.x,
     required this.y,
-    required this.text,
-    required this.pointColor,
+    this.text,
+    this.pointColor,
   });
 }
 

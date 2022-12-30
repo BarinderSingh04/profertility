@@ -60,9 +60,9 @@ class VerificationScreen extends StatelessWidget {
                         pinTheme: PinTheme(
                           activeColor: Theme.of(context).primaryColor,
                           selectedColor: Theme.of(context).primaryColor,
-                          selectedFillColor: const Color.fromARGB(255, 238, 238, 238),
-                          inactiveFillColor: const Color.fromARGB(255, 238, 238, 238),
-                          inactiveColor: const Color.fromARGB(255, 241, 241, 241),
+                          selectedFillColor: const Color.fromARGB(255, 231, 233, 237),
+                          inactiveFillColor: const Color.fromARGB(255, 231, 233, 237),
+                          inactiveColor: const Color.fromARGB(255, 231, 233, 237),
                           shape: PinCodeFieldShape.box,
                           borderRadius: BorderRadius.circular(12.0),
                           fieldHeight: 56,

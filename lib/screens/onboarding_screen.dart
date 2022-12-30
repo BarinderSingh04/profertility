@@ -194,12 +194,9 @@ class OnboardingPageWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     const Gap(4.0),
-                    const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Divider(
-                        thickness: 2,
-                        color: Color(0xffe5e5e5),
-                      ),
+                    const Divider(
+                      thickness: 2,
+                      color: Color(0xffe5e5e5),
                     ),
                     const Gap(8.0),
                     Text(

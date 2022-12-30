@@ -184,16 +184,20 @@ class DoctorDetailScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 24),
                         const Spacer(),
-                        PrimaryButton(
-                          title: "Make an Appointment",
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const ScheduleScreen(),
-                              ),
-                            );
-                          },
+                        SafeArea(
+                          top: false,
+                          child: PrimaryButton(
+                            title: "Make an Appointment",
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const ScheduleScreen(),
+                                ),
+                              );
+                            },
+                          ),
                         ),
+                        const Gap(16.0)
                       ],
                     ),
                   ),

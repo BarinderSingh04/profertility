@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:profertility/screens/home_screen.dart';
 import 'package:profertility/screens/nearby_doctor_screen.dart';
 import 'package:profertility/screens/personalized_screen.dart';
-import 'package:profertility/screens/test_list_screen.dart';
+import 'package:profertility/screens/profile_screen.dart';
+import 'package:profertility/screens/scores_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
@@ -20,7 +21,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.white,
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor:
             Theme.of(context).bottomNavigationBarTheme.backgroundColor,
@@ -33,8 +34,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
             HomeScreen(),
             PersonalizedScreen(),
             NearbyDoctorScreen(),
-            TestListScreen(),
-            PersonalizedScreen(),
+            ProfileScreen(),
+            ScoreScreen(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

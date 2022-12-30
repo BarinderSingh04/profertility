@@ -1,10 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:profertility/screens/cart_screen.dart';
 import 'package:profertility/screens/health_score_screen.dart';
 import 'package:profertility/screens/notification_screen.dart';
+import 'package:profertility/screens/reminder_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'myappointment_screen.dart';
@@ -538,43 +539,30 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         const Gap(6.0),
-                        Image.asset("assets/images/graph.png"),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                "Low",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xff898989),
-                                ),
+                        SizedBox(
+                          height: 200,
+                          child: SfCartesianChart(
+                            margin: EdgeInsets.zero,
+                            plotAreaBorderWidth: 0.0,
+                            primaryXAxis: CategoryAxis(
+                              tickPosition: TickPosition.outside,
+                              labelStyle: GoogleFonts.comfortaa(
+                                fontSize: 10.0,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "Border",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xff898989),
-                                ),
-                              ),
-                              Text(
-                                "Normal",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xff898989),
-                                ),
-                              ),
-                              Text(
-                                "High",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xff898989),
-                                ),
-                              ),
-                            ],
+                              axisLine: const AxisLine(width: 0),
+                              majorTickLines: const MajorTickLines(width: 0),
+                              majorGridLines: const MajorGridLines(width: 0),
+                            ),
+                            primaryYAxis: NumericAxis(
+                              isVisible: false,
+                              majorGridLines: const MajorGridLines(width: 0),
+                              numberFormat: NumberFormat.compact(),
+                            ),
+                            series: _getDefaultColumnSeries(),
                           ),
-                        )
+                        ),
+                        const Gap(12),
                       ],
                     ),
                   ),
@@ -659,6 +647,88 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<ColumnSeries<ChartSampleData, String>> _getDefaultColumnSeries() {
+    return <ColumnSeries<ChartSampleData, String>>[
+      ColumnSeries<ChartSampleData, String>(
+        borderRadius: BorderRadius.circular(70),
+        width: 0.2,
+        dataSource: <ChartSampleData>[
+          ChartSampleData(
+            x: 'Low',
+            y: 0.4,
+            pointColor: const Color(0xffD02251),
+          ),
+          ChartSampleData(
+            x: 'Border Low',
+            y: 0.8,
+            pointColor: const Color(0xff716267),
+          ),
+          ChartSampleData(
+            x: 'Normal',
+            y: 1.8,
+            pointColor: const Color(0xff29C7BE),
+          ),
+          ChartSampleData(
+            x: 'Border High',
+            y: 0.8,
+            pointColor: const Color(0xfffd7600),
+          ),
+          ChartSampleData(
+            x: 'High',
+            y: 0.4,
+            pointColor: const Color(0xffD02251),
+          ),
+        ],
+        xValueMapper: (ChartSampleData sales, _) => sales.x,
+        yValueMapper: (ChartSampleData sales, _) => sales.y,
+        pointColorMapper: (datum, index) => datum.pointColor,
+        dataLabelSettings: DataLabelSettings(
+          isVisible: true,
+          textStyle: GoogleFonts.comfortaa().copyWith(
+            fontSize: 10,
+            color: Colors.black,
+          ),
+          builder: (data, point, series, pointIndex, seriesIndex) {
+            return SizedBox(
+              width: pointIndex == 2 ? 40 : null,
+              height: pointIndex == 2 ? 40 : null,
+              child: Stack(
+                children: [
+                  if (pointIndex == 2)
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: Image.asset(
+                        "assets/images/drop.png",
+                        width: 40,
+                        height: 40,
+                        color: data.pointColor,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  Positioned(
+                    bottom: pointIndex == 2 ? 15 : null,
+                    right: pointIndex == 2 ? 0 : null,
+                    left: pointIndex == 2 ? 10 : null,
+                    child: Text(
+                      "${data.y * 100 ~/ 2}%",
+                      style: TextStyle(
+                        color: pointIndex == 2 ? Colors.white : Colors.black,
+                        fontSize: 10.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      )
+    ];
   }
 }
 

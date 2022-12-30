@@ -6,12 +6,13 @@ import 'package:profertility/screens/widgets/phone_number_field.dart';
 import 'package:profertility/screens/widgets/primary_button.dart';
 
 class ProfileSetupScreen extends StatelessWidget {
-  const ProfileSetupScreen({super.key});
+  final bool editProfile;
+  const ProfileSetupScreen({super.key, this.editProfile = false});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppbar(title: "Profile Setup"),
+      appBar: MyAppbar(title: editProfile ? "Edit Profile" : "Profile Setup"),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -47,7 +48,10 @@ class ProfileSetupScreen extends StatelessWidget {
             const SizedBox(height: 16),
             const PhoneNumberField(),
             const SizedBox(height: 16),
-            DateTimeFormField(context: context),
+            DateTimeFormField(
+              context: context,
+              hint: "Date of Birth",
+            ),
             const SizedBox(height: 16),
             DropdownButtonFormField(
               icon: Image.asset("assets/images/Polygon.png"),
@@ -114,11 +118,15 @@ class ProfileSetupScreen extends StatelessWidget {
             PrimaryButton(
               title: "Submit",
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const WelcomeProfertility(),
-                  ),
-                );
+                if (editProfile) {
+                  Navigator.of(context).pop();
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const WelcomeProfertility(),
+                    ),
+                  );
+                }
               },
             ),
             const SizedBox(height: 16),
@@ -131,10 +139,12 @@ class ProfileSetupScreen extends StatelessWidget {
 
 class DateTimeFormField extends FormField<DateTime> {
   final BuildContext context;
+  final String hint;
 
   DateTimeFormField({
     Key? key,
     required this.context,
+    required this.hint,
     FormFieldSetter<DateTime>? onSaved,
     FormFieldValidator<DateTime>? validator,
     DateTime? initialValue,
@@ -161,7 +171,9 @@ class DateTimeFormField extends FormField<DateTime> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 22),
+                      horizontal: 24,
+                      vertical: 20,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xfff7f8fa),
                       border: state.hasError
@@ -177,7 +189,15 @@ class DateTimeFormField extends FormField<DateTime> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(dateTime(state.value)),
+                            Text(
+                              dateTime(state.value, hint),
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: state.value == null
+                                    ? Colors.grey[700]
+                                    : Colors.black,
+                              ),
+                            ),
                             Image.asset(
                               "assets/images/calendar.png",
                               fit: BoxFit.contain,
@@ -200,8 +220,7 @@ class DateTimeFormField extends FormField<DateTime> {
                           Padding(
                             padding: const EdgeInsets.only(left: 12.0),
                             child: Text(
-                              state.errorText ??
-                                  "Please select a Date of Birth",
+                              state.errorText ?? "",
                               style: TextStyle(
                                 fontSize: 12.0,
                                 color: Theme.of(context).colorScheme.error,
@@ -217,9 +236,9 @@ class DateTimeFormField extends FormField<DateTime> {
           },
         );
 
-  static String dateTime(DateTime? selectedDate) {
+  static String dateTime(DateTime? selectedDate, String hint) {
     if (selectedDate == null) {
-      return "Date of Birth";
+      return hint;
     } else {
       return DateFormat('dd/MM/yyyy').format(selectedDate);
     }

@@ -43,6 +43,7 @@ dependencies:
   pin_code_fields: ^7.4.0
   country_picker: ^2.0.18
   syncfusion_flutter_charts: ^20.3.61
+  syncfusion_flutter_gauges: ^20.4.38
   
 
 dev_dependencies:

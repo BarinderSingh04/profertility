@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:profertility/screens/form_screen.dart';
+import 'package:profertility/screens/home_screen.dart';
+import 'package:profertility/screens/navigation_screen.dart';
+import 'package:profertility/screens/reminder_screen.dart';
 import 'package:profertility/screens/splash_screen.dart';
 import 'screens/theme/colors.dart';
 
@@ -39,8 +43,10 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: const Color(0xfff7f8fa),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 24, vertical: 22),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 22,
+            vertical: 20,
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(70),
             borderSide: BorderSide.none,
@@ -48,7 +54,7 @@ class MyApp extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(70),
             borderSide: const BorderSide(
-              width: 2,
+              width: 1.5,
               color: Color(0xFF00AFA4),
             ),
           ),
